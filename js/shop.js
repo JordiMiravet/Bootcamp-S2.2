@@ -70,6 +70,7 @@ const products = [
 // ** Don't hesitate to seek help from your peers or your mentor if you still struggle with debugging.
 
 // Improved version of cartList. Cart is an array of products (objects), but each one has a quantity field to define its quantity, so these products are not repeated.
+
 const cart = [];
 
 const total = 0;
@@ -78,28 +79,58 @@ const total = 0;
 const buy = (id) => {
     // 1. Loop for to the array products to get the item to add to cart
     // 2. Add found product to the cart array
+
+    const product = products.find( item => item.id === Number(id));
+    const productInCart = cart.find( item => item.id === Number(id));
+    // console.log(id)
+    if(productInCart){
+        productInCart.quantity += 1;
+    }else{
+        const productAdd = {...product, quantity: 1}
+        cart.push(productAdd)
+    } 
+    // console.log(cart)
 }
 
 // Exercise 2
 const cleanCart = () =>  {
-
+    cart.length = 0;
 }
 
 // Exercise 3
 const calculateTotal = () =>  {
     // Calculate total price of the cart using the "cartList" array
+
+    let cartList = 0;
+    for(let i = 0; i < cart.length; i++){
+        cartList += cart[i].price * cart[i].quantity;
+    }
+    // console.log(cartList)
 }
 
 // Exercise 4
 const applyPromotionsCart = () =>  {
     // Apply promotions to each item in the array "cart"
+
+    cart.forEach( item => {
+
+        if (item.offer && item.quantity >= item.offer.number) {
+
+            const discount = item.offer.percent;
+            const discountedPrice = item.price * (1 - discount / 100);
+
+            item.subtotalWithDiscount = discountedPrice * item.quantity;
+        }
+        // console.log(item.subtotalWithDiscount)
+    });
 }
 
 // Exercise 5
 const printCart = () => {
     // Fill the shopping cart modal manipulating the shopping cart dom
-}
 
+
+}
 
 // ** Nivell II **
 
@@ -111,3 +142,15 @@ const removeFromCart = (id) => {
 const open_modal = () =>  {
     printCart();
 }
+
+document.querySelectorAll(".add-to-cart").forEach(button => {
+    button.addEventListener("click", () => {
+        const productId = button.getAttribute("data-product-id");
+        buy(productId);
+        calculateTotal();
+        applyPromotionsCart();
+    });
+});
+document.getElementById("clean-cart").addEventListener("click", () => {
+    cleanCart()
+})
