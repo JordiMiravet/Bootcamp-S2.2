@@ -64,22 +64,11 @@ const products = [
     }
 ]
 
-// => Reminder, it's extremely important that you debug your code. 
-// ** It will save you a lot of time and frustration!
-// ** You'll understand the code better than with console.log(), and you'll also find errors faster. 
-// ** Don't hesitate to seek help from your peers or your mentor if you still struggle with debugging.
-
-// Improved version of cartList. Cart is an array of products (objects), but each one has a quantity field to define its quantity, so these products are not repeated.
-
 const cart = [];
-
 const total = 0;
 
 // Exercise 1
 const buy = (id) => {
-    // 1. Loop for to the array products to get the item to add to cart
-    // 2. Add found product to the cart array
-
     const product = products.find( item => item.id === Number(id));
     const productInCart = cart.find( item => item.id === Number(id));
 
@@ -89,7 +78,6 @@ const buy = (id) => {
         const productAdd = {...product, quantity: 1}
         cart.push(productAdd)
     } 
-    // console.log(cart)
 }
 
 // Exercise 2
@@ -99,20 +87,15 @@ const cleanCart = () =>  {
 
 // Exercise 3
 const calculateTotal = () =>  {
-    // Calculate total price of the cart using the "cartList" array
-
     let cartList = 0;
     for(let i = 0; i < cart.length; i++){
         cartList += cart[i].price * cart[i].quantity;
     }
     return cartList = 0;
-    // console.log(cartList)
 }
 
 // Exercise 4
 const applyPromotionsCart = () =>  {
-    // Apply promotions to each item in the array "cart"
-
     cart.forEach( item => {
 
         if (item.offer && item.quantity >= item.offer.number) {
@@ -121,15 +104,14 @@ const applyPromotionsCart = () =>  {
             const discountedPrice = item.price * (1 - discount / 100);
 
             item.subtotalWithDiscount = discountedPrice * item.quantity;
+        } else {
+            delete item.subtotalWithDiscount;
         }
-        // console.log(item.subtotalWithDiscount)
     });
 }
 
 // Exercise 5
 const printCart = () => {
-    // Fill the shopping cart modal manipulating the shopping cart dom
-
     const cartBox = document.getElementById("cart_list");
     const totalPriceElement = document.getElementById("total_price");
     cartBox.innerHTML = "";
@@ -145,6 +127,8 @@ const printCart = () => {
             <td>$${item.price}</td>
             <td>${item.quantity}</td>
             <td>$${Number.isInteger(priceWithDiscount) ? priceWithDiscount : priceWithDiscount.toFixed(2)}</td>
+            <td><button class="remove-item btn btn-sm bg-danger text-white fw-bold" data-product-id="${item.id}" >Rest</button></td>
+            <td><button class="add-item btn btn-sm bg-primary text-white fw-bold" data-product-id="${item.id}" >Sum</button></td>
         `;
         cartBox.appendChild(row);
 
@@ -152,30 +136,71 @@ const printCart = () => {
     });
 
     totalPriceElement.textContent = Number.isInteger(total) ? total : total.toFixed(2);
-
 }
 
 // ** Nivell II **
 
 // Exercise 7
 const removeFromCart = (id) => {
+    const itemInCart = cart.find( item => item.id === id);
 
+    if(!itemInCart) return;
+
+    if(itemInCart.quantity > 1) {
+        itemInCart.quantity -= 1;
+    }else{
+        const indexItem = cart.findIndex(item => item.id === id);
+        if (indexItem > -1) {
+            cart.splice(indexItem, 1);
+        }
+    }
+};
+
+const addFromCart = (id) => {
+    const itemInCart = cart.find( item => item.id === id);
+
+    if(!itemInCart) return;
+    if(itemInCart.quantity) return itemInCart.quantity += 1;
 }
+
 
 const open_modal = () =>  {
     printCart();
 }
 
+// Eventos 
+
 document.querySelectorAll(".add-to-cart").forEach(button => {
     button.addEventListener("click", () => {
         const productId = button.getAttribute("data-product-id");
+
         buy(productId);
         calculateTotal();
         applyPromotionsCart();
         printCart();
     });
 });
+
 document.getElementById("clean-cart").addEventListener("click", () => {
     cleanCart();
     printCart();
 })
+
+document.getElementById("cart_list").addEventListener("click", (e) => {
+    const itemId = Number(e.target.getAttribute("data-product-id"));
+
+    if(e.target.classList.contains("remove-item")){
+        removeFromCart(itemId);
+        applyPromotionsCart();
+        printCart();
+    }
+    if(e.target.classList.contains("add-item")){
+        addFromCart(itemId);
+        applyPromotionsCart();
+        printCart();
+
+    }
+});
+
+
+
