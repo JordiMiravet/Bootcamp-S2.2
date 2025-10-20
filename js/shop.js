@@ -82,7 +82,7 @@ const buy = (id) => {
 
     const product = products.find( item => item.id === Number(id));
     const productInCart = cart.find( item => item.id === Number(id));
-    // console.log(id)
+
     if(productInCart){
         productInCart.quantity += 1;
     }else{
@@ -105,6 +105,7 @@ const calculateTotal = () =>  {
     for(let i = 0; i < cart.length; i++){
         cartList += cart[i].price * cart[i].quantity;
     }
+    return cartList = 0;
     // console.log(cartList)
 }
 
@@ -129,6 +130,28 @@ const applyPromotionsCart = () =>  {
 const printCart = () => {
     // Fill the shopping cart modal manipulating the shopping cart dom
 
+    const cartBox = document.getElementById("cart_list");
+    const totalPriceElement = document.getElementById("total_price");
+    cartBox.innerHTML = "";
+
+    let total = 0;
+
+    cart.forEach(item => {
+        const priceWithDiscount = item.subtotalWithDiscount || (item.price * item.quantity);
+
+        const row = document.createElement("tr");
+        row.innerHTML=`
+            <th scope="row">${item.name}</th>
+            <td>$${item.price}</td>
+            <td>${item.quantity}</td>
+            <td>$${Number.isInteger(priceWithDiscount) ? priceWithDiscount : priceWithDiscount.toFixed(2)}</td>
+        `;
+        cartBox.appendChild(row);
+
+        total += priceWithDiscount;
+    });
+
+    totalPriceElement.textContent = Number.isInteger(total) ? total : total.toFixed(2);
 
 }
 
@@ -149,8 +172,10 @@ document.querySelectorAll(".add-to-cart").forEach(button => {
         buy(productId);
         calculateTotal();
         applyPromotionsCart();
+        printCart();
     });
 });
 document.getElementById("clean-cart").addEventListener("click", () => {
-    cleanCart()
+    cleanCart();
+    printCart();
 })
