@@ -97,7 +97,7 @@ const calculateTotal = () =>  {
     for(let i = 0; i < cart.length; i++){
         cartList += cart[i].price * cart[i].quantity;
     }
-    return cartList = 0;
+    return cartList;
 }
 
 // --------------------------------------------------
@@ -198,11 +198,9 @@ const countProduct = () => {
     const countProduct = document.getElementById("count_product");
     let counting = 0;
     const cartNumber = cart.forEach(item => {
-        if(item.quantity > 1){
-            counting += item.quantity
-        } else{
-            counting += 1
-        }
+        item.quantity > 1
+            ? counting += item.quantity
+            : counting += 1
     })
     countProduct.innerText = counting
 }
