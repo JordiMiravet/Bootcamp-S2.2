@@ -67,7 +67,9 @@ const products = [
 const cart = [];
 const total = 0;
 
+// --------------------------------------------------
 // Exercise 1
+
 const buy = (id) => {
     const product = products.find( item => item.id === Number(id));
     const productInCart = cart.find( item => item.id === Number(id));
@@ -80,12 +82,16 @@ const buy = (id) => {
     } 
 }
 
+// --------------------------------------------------
 // Exercise 2
+
 const cleanCart = () =>  {
     cart.length = 0;
 }
 
+// --------------------------------------------------
 // Exercise 3
+
 const calculateTotal = () =>  {
     let cartList = 0;
     for(let i = 0; i < cart.length; i++){
@@ -94,7 +100,9 @@ const calculateTotal = () =>  {
     return cartList = 0;
 }
 
+// --------------------------------------------------
 // Exercise 4
+
 const applyPromotionsCart = () =>  {
     cart.forEach( item => {
 
@@ -110,26 +118,40 @@ const applyPromotionsCart = () =>  {
     });
 }
 
+// --------------------------------------------------
 // Exercise 5
-const printCart = () => {
+ 
+function getElements(){
     const cartBox = document.getElementById("cart_list");
     const totalPriceElement = document.getElementById("total_price");
+
+    return { cartBox, totalPriceElement };
+}
+
+
+const createCartElement = (item) => {
+    const priceWithDiscount = item.subtotalWithDiscount || (item.price * item.quantity);
+
+    const row = document.createElement("tr");
+    row.innerHTML=`
+        <th scope="row">${item.name}</th>
+        <td>$${item.price}</td>
+        <td>${item.quantity}</td>
+        <td>$${Number.isInteger(priceWithDiscount) ? priceWithDiscount : priceWithDiscount.toFixed(2)}</td>
+        <td><button class="remove-item btn btn-sm bg-danger text-white fw-bold" data-product-id="${item.id}">Rest</button></td>
+        <td><button class="add-item btn btn-sm bg-primary text-white fw-bold" data-product-id="${item.id}">Sum</button></td>
+    `;
+    return { row, priceWithDiscount };
+}
+
+const printCart = () => {
+    const { cartBox, totalPriceElement } = getElements();
     cartBox.innerHTML = "";
 
     let total = 0;
 
     cart.forEach(item => {
-        const priceWithDiscount = item.subtotalWithDiscount || (item.price * item.quantity);
-
-        const row = document.createElement("tr");
-        row.innerHTML=`
-            <th scope="row">${item.name}</th>
-            <td>$${item.price}</td>
-            <td>${item.quantity}</td>
-            <td>$${Number.isInteger(priceWithDiscount) ? priceWithDiscount : priceWithDiscount.toFixed(2)}</td>
-            <td><button class="remove-item btn btn-sm bg-danger text-white fw-bold" data-product-id="${item.id}" >Rest</button></td>
-            <td><button class="add-item btn btn-sm bg-primary text-white fw-bold" data-product-id="${item.id}" >Sum</button></td>
-        `;
+        const { row, priceWithDiscount } = createCartElement(item);
         cartBox.appendChild(row);
 
         total += priceWithDiscount;
@@ -138,9 +160,9 @@ const printCart = () => {
     totalPriceElement.textContent = Number.isInteger(total) ? total : total.toFixed(2);
 }
 
-// ** Nivell II **
-
+// --------------------------------------------------
 // Exercise 7
+
 const removeFromCart = (id) => {
     const itemInCart = cart.find( item => item.id === id);
 
@@ -168,6 +190,24 @@ const open_modal = () =>  {
     printCart();
 }
 
+// --------------------------------------------------
+// Exercise Extra 
+// * Me estaba dando toc que no subiera el contador del cart en el botton del navbar xD así que le he añadido la logica
+
+const countProduct = () => {
+    const countProduct = document.getElementById("count_product");
+    let counting = 0;
+    const cartNumber = cart.forEach(item => {
+        if(item.quantity > 1){
+            counting += item.quantity
+        } else{
+            counting += 1
+        }
+    })
+    countProduct.innerText = counting
+}
+
+// ---------------------------------------------------------------------------------------------------- //
 // Eventos 
 
 document.querySelectorAll(".add-to-cart").forEach(button => {
@@ -178,6 +218,7 @@ document.querySelectorAll(".add-to-cart").forEach(button => {
         calculateTotal();
         applyPromotionsCart();
         printCart();
+        countProduct();
     });
 });
 
@@ -193,12 +234,17 @@ document.getElementById("cart_list").addEventListener("click", (e) => {
         removeFromCart(itemId);
         applyPromotionsCart();
         printCart();
+        countProduct();
     }
+
+    // Exercise Extra
+    // * Ya que estaba no me costaba nada añadir un boton de add junto al de deleted y así he reafirmado la logica en mi cabeza
+
     if(e.target.classList.contains("add-item")){
         addFromCart(itemId);
         applyPromotionsCart();
         printCart();
-
+        countProduct();
     }
 });
 
