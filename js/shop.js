@@ -196,6 +196,7 @@ const open_modal = () =>  {
 
 const countProduct = () => {
     const countProduct = document.getElementById("count_product");
+    const cleanCartButton = document.getElementById("clean-cart");
     let counting = 0;
     const cartNumber = cart.forEach(item => {
         item.quantity > 1
@@ -203,6 +204,11 @@ const countProduct = () => {
             : counting += 1
     })
     countProduct.innerText = counting
+
+    
+    counting === 0 
+        ? cleanCartButton.disabled = true 
+        : cleanCartButton.disabled = false
 }
 
 // ---------------------------------------------------------------------------------------------------- //
@@ -223,6 +229,8 @@ document.querySelectorAll(".add-to-cart").forEach(button => {
 document.getElementById("clean-cart").addEventListener("click", () => {
     cleanCart();
     printCart();
+    countProduct();
+    
 })
 
 document.getElementById("cart_list").addEventListener("click", (e) => {
@@ -245,6 +253,3 @@ document.getElementById("cart_list").addEventListener("click", (e) => {
         countProduct();
     }
 });
-
-
-
