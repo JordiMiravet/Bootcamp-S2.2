@@ -93,11 +93,10 @@ const cleanCart = () =>  {
 // Exercise 3
 
 const calculateTotal = () =>  {
-    let cartList = 0;
-    for(let i = 0; i < cart.length; i++){
-        cartList += cart[i].price * cart[i].quantity;
-    }
-    return cartList;
+    let total = 0;
+
+    cart.forEach(item => total += item.price * item.quantity )
+    return total;
 }
 
 // --------------------------------------------------
@@ -127,7 +126,6 @@ function getElements(){
 
     return { cartBox, totalPriceElement };
 }
-
 
 const createCartElement = (item) => {
     const priceWithDiscount = item.subtotalWithDiscount || (item.price * item.quantity);
@@ -164,18 +162,13 @@ const printCart = () => {
 // Exercise 7
 
 const removeFromCart = (id) => {
-    const itemInCart = cart.find( item => item.id === id);
+    const indexItem = cart.findIndex(item => item.id === id);
+    if(indexItem === -1) return;
 
-    if(!itemInCart) return;
-
-    if(itemInCart.quantity > 1) {
-        itemInCart.quantity -= 1;
-    }else{
-        const indexItem = cart.findIndex(item => item.id === id);
-        if (indexItem > -1) {
-            cart.splice(indexItem, 1);
-        }
-    }
+    const item = cart[indexItem];
+    item.quantity > 1
+        ? item.quantity -= 1
+        : cart.splice(indexItem, 1);
 };
 
 const addFromCart = (id) => {
@@ -205,7 +198,6 @@ const countProduct = () => {
     })
     countProduct.innerText = counting
 
-    
     counting === 0 
         ? cleanCartButton.disabled = true 
         : cleanCartButton.disabled = false
