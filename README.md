@@ -39,7 +39,7 @@ git clone https://github.com/JordiMiravet/Bootcamp-S2.2.git
 
 #### validate.js
 - Este script contiene las funciones necesarias para validar los campos del formulario en la página checkout.html. Se encarga de comprobar que los datos introducidos por el usuario cumplen con ciertos requisitos (como longitud mínima, formato de email, uso de solo letras o números, etc.).
-- Además, aplica de forma dinámica los estilos visuales de Bootstrap (is-valid / is-invalid) en los campos del formulario, indicando si el contenido introducido es valido o no.
+- Además, aplica de forma dinámica los estilos visuales de Bootstrap (`is-valid` / `is-invalid`) en los campos del formulario, indicando si el contenido introducido es valido o no.
 
 ### Funciones principales:
 
@@ -68,7 +68,7 @@ git clone https://github.com/JordiMiravet/Bootcamp-S2.2.git
 - Actualiza el contador de productos en el navbar y habilita/deshabilita el botón de "limpiar carrito" segun la cantidad de producto que hay en el.
 
 #### Función `validateInput(input, isValid)`
-- Aplica clases de Bootstrap para mostrar visualmente si un campo del formulario es válido o no. Añade la clase is-valid si el valor es correcto o is-invalid si no lo es.
+- Aplica clases de Bootstrap para mostrar visualmente si un campo del formulario es válido o no. Añade la clase `is-valid` si el valor es correcto o `is-invalid` si no lo es.
 
 #### Función `getInputsForm()`
 - Devuelve una colección de referencias a los campos del formulario (nombre, apellido, email, contraseña, dirección, teléfono) para usarlos en las funciones de validación.
@@ -77,13 +77,13 @@ git clone https://github.com/JordiMiravet/Bootcamp-S2.2.git
 - Devuelve los patrones de expresiones regulares utilizados para validar el contenido de los inputs: texto, números, contraseña y formato de email.
 
 #### Función `validate()`
-- Ejecuta la validación de todos los campos del formulario utilizando las expresiones regulares y condiciones mínimas (como longitud de texto). Aplica los estilos correspondientes (is-valid / is-invalid) a cada input, según si pasa la validación o no.
+- Ejecuta la validación de todos los campos del formulario utilizando las expresiones regulares y condiciones mínimas (como longitud de texto). Aplica los estilos correspondientes (`is-valid` / `is-invalid`) a cada input, según si pasa la validación o no.
 
 ### Eventos
-- Los botones de agregar al carrito, eliminar productos, y aumentar la cantidad del carrito tienen eventos asociados que gestionan las funciones correspondientes. Además, se actualizan dinámicamente tanto el carrito como el total cuando se realizan acciones.
-- El formulario de checkout.html tiene un evento asociado al envío (submit). Este evento es interceptado para evitar el comportamiento por defecto (recargar la página), y en su lugar ejecuta la función validate() para comprobar los datos introducidos.
+- En la pagina index.html, los botones de agregar al carrito, eliminar productos, y aumentar la cantidad del carrito tienen eventos asociados que gestionan las funciones correspondientes. Además, se actualizan dinámicamente tanto el carrito como el total cuando se realizan acciones.
+- El formulario de `checkout.html` tiene un evento asociado al envío (`submit`). Este evento es interceptado para evitar el comportamiento por defecto (recargar la página), y en su lugar ejecuta la función validate() para comprobar los datos introducidos.
 
-## HTML
+## HTML & CSS
 
 ### Estructura de la página: 
 - El HTML tiene una sección para mostrar los productos, un área para el carrito y un navbar donde se muestra el contador de productos dinamicamente, además de una pagina dedicada para la validacion de datos.
