@@ -4,8 +4,6 @@
 ## Descripción:
 Este es un pequeño proyecto de carrito de compras hecho con JavaScript. El carrito permite agregar productos, aplicar promociones de descuento y gestionar la compra de manera dinámica.
 
----
-
 ## Funcionalidades:
 - Agregar productos al carrito o incrementar su cantidad si ya está presente.
 - Eliminar productos del carrito de manera individual (borrar items individualmente) o colectiva (borrar todo el carrito)
@@ -14,14 +12,12 @@ Este es un pequeño proyecto de carrito de compras hecho con JavaScript. El carr
 - Limpiar carrito (aspecto visual) Pudiendo vaciar el carrito con un solo clic.
 - Contador de productos en el navbar: El número total de productos en el carrito se actualiza en tiempo real en el navbar, además el botón de "limpiar carrito" se habilita o deshabilita según el estado del carrito.
 
----
-
-## Técnologias Utilizadas
+## Técnologias Utilizadas:
 - HTML
 - CSS Bootstrap
 - JS
 
---
+---
 
 ## Javascript
 
@@ -34,7 +30,7 @@ Este es un pequeño proyecto de carrito de compras hecho con JavaScript. El carr
 - Este script contiene las funciones necesarias para validar los campos del formulario en la página checkout.html. Se encarga de comprobar que los datos introducidos por el usuario cumplen con ciertos requisitos (como longitud mínima, formato de email, uso de solo letras o números, etc.).
 - Además, aplica de forma dinámica los estilos visuales de Bootstrap (is-valid / is-invalid) en los campos del formulario, indicando si el contenido introducido es valido o no.
 
-### Funciones principales
+### Funciones principales:
 
 #### Funcion `buy(id)`
 - Añade un producto al carrito. Si el producto ya está en el carrito, aumenta su cantidad. Si no, lo agrega con una cantidad inicial de 1.
@@ -73,21 +69,15 @@ Este es un pequeño proyecto de carrito de compras hecho con JavaScript. El carr
 - Ejecuta la validación de todos los campos del formulario utilizando las expresiones regulares y condiciones mínimas (como longitud de texto). Aplica los estilos correspondientes (is-valid / is-invalid) a cada input, según si pasa la validación o no.
 
 ### Eventos
-
-Los botones de agregar al carrito, eliminar productos, y aumentar la cantidad del carrito tienen eventos asociados que gestionan las funciones correspondientes. Además, se actualizan dinámicamente tanto el carrito como el total cuando se realizan acciones.
-
-El formulario de checkout.html tiene un evento asociado al envío (submit). Este evento es interceptado para evitar el comportamiento por defecto (recargar la página), y en su lugar ejecuta la función validate() para comprobar los datos introducidos.
-
----
+- Los botones de agregar al carrito, eliminar productos, y aumentar la cantidad del carrito tienen eventos asociados que gestionan las funciones correspondientes. Además, se actualizan dinámicamente tanto el carrito como el total cuando se realizan acciones.
+- El formulario de checkout.html tiene un evento asociado al envío (submit). Este evento es interceptado para evitar el comportamiento por defecto (recargar la página), y en su lugar ejecuta la función validate() para comprobar los datos introducidos.
 
 ## HTML
 
 ### Estructura de la página: 
 - El HTML tiene una sección para mostrar los productos, un área para el carrito y un navbar donde se muestra el contador de productos dinamicamente, además de una pagina dedicada para la validacion de datos.
 
----
-
-## Instalación
+## Instalación:
 
 - Abre la terminal Git Bash
 - Busca una carpeta en la que se desee depositar el proyecto
@@ -98,7 +88,5 @@ git clone https://github.com/JordiMiravet/Bootcamp-S2.2.git
 - Abre el proyecto en el IDE
 - Instala la extension `Live Server` y abre con ella el archivo index.html en tu navegador.
 
----
-
-## Autor
+## Autor:
 - Proyecto creado por Jordi Miravet &copy; como parte del mòdulo S.2.2 del Bootcamp de Frontend de itAcademy
