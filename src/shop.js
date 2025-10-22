@@ -136,8 +136,8 @@ const createCartElement = (item) => {
         <td>$${item.price}</td>
         <td>${item.quantity}</td>
         <td>$${Number.isInteger(priceWithDiscount) ? priceWithDiscount : priceWithDiscount.toFixed(2)}</td>
-        <td><button class="remove-item btn btn-sm bg-danger text-white fw-bold" data-product-id="${item.id}">Rest</button></td>
-        <td><button class="add-item btn btn-sm bg-primary text-white fw-bold" data-product-id="${item.id}">Sum</button></td>
+        <td><button class="remove-item btn btn-sm bg-danger text-white fw-bold" data-product-id="${item.id}">-</button></td>
+        <td><button class="add-item btn btn-sm bg-primary text-white fw-bold" data-product-id="${item.id}">+</button></td>
     `;
     return { row, priceWithDiscount };
 }
