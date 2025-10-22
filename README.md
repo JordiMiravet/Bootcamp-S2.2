@@ -17,6 +17,17 @@ Este es un pequeño proyecto de carrito de compras hecho con JavaScript. El carr
 - CSS Bootstrap
 - JS
 
+## Instalación:
+
+- Abre la terminal Git Bash
+- Busca una carpeta en la que se desee depositar el proyecto
+- Clona el repositorio utilizando el siguiente codigo
+```bash
+git clone https://github.com/JordiMiravet/Bootcamp-S2.2.git
+```
+- Abre el proyecto en el IDE
+- Instala la extension `Live Server` y abre con ella el archivo index.html en tu navegador.
+
 ---
 
 ## Javascript
@@ -77,16 +88,7 @@ Este es un pequeño proyecto de carrito de compras hecho con JavaScript. El carr
 ### Estructura de la página: 
 - El HTML tiene una sección para mostrar los productos, un área para el carrito y un navbar donde se muestra el contador de productos dinamicamente, además de una pagina dedicada para la validacion de datos.
 
-## Instalación:
-
-- Abre la terminal Git Bash
-- Busca una carpeta en la que se desee depositar el proyecto
-- Clona el repositorio utilizando el siguiente codigo
-```bash
-git clone https://github.com/JordiMiravet/Bootcamp-S2.2.git
-```
-- Abre el proyecto en el IDE
-- Instala la extension `Live Server` y abre con ella el archivo index.html en tu navegador.
+---
 
 ## Autor:
 - Proyecto creado por Jordi Miravet &copy; como parte del mòdulo S.2.2 del Bootcamp de Frontend de itAcademy
