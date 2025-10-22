@@ -28,6 +28,10 @@ git clone https://github.com/JordiMiravet/Bootcamp-S2.2.git
 - Abre el proyecto en el IDE
 - Instala la extension `Live Server` y abre con ella el archivo index.html en tu navegador.
 
+## Live Demo
+
+Puedes ver el proyecto aquí: [Bootcamp S2.2](https://jordimiravet.github.io/Bootcamp-S2.2/)
+
 ---
 
 ## Javascript
