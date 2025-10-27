@@ -23,7 +23,7 @@ function getInputsForm(){
 }
 
 function getRegex(){
-	const regexOnlyText = /^[a-zA-Z]+$/;
+	const regexOnlyText = /^[a-zA-ZÀ-ÿ\s]+$/;
 	const regexOnlyNumbers = /^[0-9]*$/;
 	const regexPassword = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]+$/;
 	const regexMail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
