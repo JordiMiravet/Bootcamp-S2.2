@@ -14,8 +14,8 @@ async function loadProducts() {
 }
 
 // --------------------------------------------------
+
 const cart = [];
-const total = 0;
 
 // --------------------------------------------------
 // Exercise 1
@@ -125,36 +125,31 @@ const addFromCart = (id) => {
     const itemInCart = cart.find( item => item.id === id);
 
     if(!itemInCart) return;
-    if(itemInCart.quantity) return itemInCart.quantity += 1;
+     itemInCart.quantity += 1;
 }
-
 
 const open_modal = () =>  {
     printCart();
 }
 
 // --------------------------------------------------
-// Exercise Extra 
-// * Me estaba dando toc que no subiera el contador del cart en el botton del navbar xD así que le he añadido la logica
+// Logica Extra
 
 const countProduct = () => {
     const countProduct = document.getElementById("count_product");
     const cleanCartButton = document.getElementById("clean-cart");
-    let counting = 0;
-    const cartNumber = cart.forEach(item => {
-        item.quantity > 1
-            ? counting += item.quantity
-            : counting += 1
-    })
-    countProduct.innerText = counting
 
+    const counting = cart.reduce((sum, item) => sum + item.quantity, 0);
+    countProduct.innerText = counting;
+    
     counting === 0 
-        ? cleanCartButton.disabled = true 
+        ? cleanCartButton.disabled = true
         : cleanCartButton.disabled = false
 }
 
 // ---------------------------------------------------------------------------------------------------- //
 // Eventos 
+
 document.addEventListener("DOMContentLoaded", async () => {
     await loadProducts();
 
@@ -169,8 +164,6 @@ document.addEventListener("DOMContentLoaded", async () => {
             countProduct();
         });
     });
-
-
 
     document.getElementById("clean-cart").addEventListener("click", () => {
         cleanCart();
@@ -189,8 +182,8 @@ document.addEventListener("DOMContentLoaded", async () => {
             countProduct();
         }
 
-        // Exercise Extra
-        // * Ya que estaba no me costaba nada añadir un boton de add junto al de deleted y así he reafirmado la logica en mi cabeza
+        // --------------------------------------------------
+        // Logica Extra
 
         if(e.target.classList.contains("add-item")){
             addFromCart(itemId);
